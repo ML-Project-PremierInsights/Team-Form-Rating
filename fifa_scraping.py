@@ -66,5 +66,5 @@ df = pd.DataFrame(p_data, columns=['OVR', 'Name', 'Pos', 'Age'])
 print(df)
 print('\n\n')
 
-df.to_csv('fifa_rating_23.csv', index=False)
+#df.to_csv('fifa_rating_23.csv', index=False)
 print(count)
