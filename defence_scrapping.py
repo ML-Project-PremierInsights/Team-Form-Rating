@@ -13,7 +13,7 @@ while (season_start <= 2023):
     soup_uncommented = BeautifulSoup(uncommented_html, "html.parser")
     table = soup_uncommented.find("table", {"id": "stats_standard"})
 
-    offensive_position = {'FW','MF'}
+    offensive_position = {'DF','MF'}
     filtered_rows = []
     count = 0
 
