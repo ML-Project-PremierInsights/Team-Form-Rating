@@ -5,13 +5,14 @@ season_start = 2000
 
 
 while (season_start <= 2023):
-    url = f'https://fbref.com/en/comps/9/{season_start}-{season_start+1}/stats/{season_start}-{season_start+1}-Premier-League-Stats'
+    url = f'https://fbref.com/en/comps/9/{season_start}-{season_start+1}/defense/{season_start}-{season_start+1}-Premier-League-Stats'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     html_content = soup.prettify()
     uncommented_html = html_content.replace("<!--", "").replace("-->", "")
     soup_uncommented = BeautifulSoup(uncommented_html, "html.parser")
-    table = soup_uncommented.find("table", {"id": "stats_standard"})
+    table = soup_uncommented.find("table", {"id": "stats_defense"})
+    # print(table)
 
     offensive_position = {'DF','MF'}
     filtered_rows = []
@@ -19,7 +20,7 @@ while (season_start <= 2023):
 
     output = ""
 
-    headers = "Name,Pos,Squad,MP,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR\n"
+    headers = "Name,Pos,Squad,Tackle,Tacklewon,Interceptions,Clearances,Errors\n"
     output += headers
 
     team_stat_data = []
@@ -35,7 +36,7 @@ while (season_start <= 2023):
             for i in temp:
                 if i in offensive_position:
                     row_data[2] = i
-                    filtered_row_data = [row_data[0], row_data[2], row_data[3], row_data[6], row_data[10], row_data[11], row_data[12], row_data[13], row_data[14], row_data[15], row_data[16], row_data[17]]
+                    filtered_row_data = [row_data[0], row_data[2], row_data[3], row_data[7], row_data[8], row_data[19], row_data[21], row_data[22]]
                     team_stat_data.append(filtered_row_data)
                     # print(filtered_row_data)
                     output += ",".join(filtered_row_data) + "\n"
@@ -58,7 +59,7 @@ while (season_start <= 2023):
     #     team_set_dict[team].sort(key=lambda x: int(x[3]), reverse=True)
     # print(team_set_dict['Manchester City'])
 
-    with open(f'offensive_stats/{season_start}-{season_start+1}.csv', 'w', encoding='utf-8') as f:
+    with open(f'defensive_stats/{season_start}-{season_start+1}.csv', 'w', encoding='utf-8') as f:
         f.write(output)
     
     season_start += 1

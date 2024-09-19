@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-season_start = 2000
+season_start = 2023
 
 
 while (season_start <= 2023):
@@ -12,6 +12,7 @@ while (season_start <= 2023):
     uncommented_html = html_content.replace("<!--", "").replace("-->", "")
     soup_uncommented = BeautifulSoup(uncommented_html, "html.parser")
     table = soup_uncommented.find("table", {"id": "stats_standard"})
+    print(table)
 
     offensive_position = {'FW','MF'}
     filtered_rows = []
@@ -60,5 +61,4 @@ while (season_start <= 2023):
 
     with open(f'offensive_stats/{season_start}-{season_start+1}.csv', 'w', encoding='utf-8') as f:
         f.write(output)
-    
     season_start += 1
