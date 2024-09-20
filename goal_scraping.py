@@ -1,10 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 
-season_start = 1992
+season_start = 2020
 
 
-while (season_start <= 1999):
+while (season_start <= 2020):
     url = f'https://fbref.com/en/comps/9/{season_start}-{season_start+1}/keepers/{season_start}-{season_start+1}-Premier-League-Stats'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
