@@ -1,10 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 
-season_start = 2023
+season_start = 1992
 
 
-while (season_start <= 2023):
+while (season_start <= 1999):
     url = f'https://fbref.com/en/comps/9/{season_start}-{season_start+1}/stats/{season_start}-{season_start+1}-Premier-League-Stats'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -12,7 +12,6 @@ while (season_start <= 2023):
     uncommented_html = html_content.replace("<!--", "").replace("-->", "")
     soup_uncommented = BeautifulSoup(uncommented_html, "html.parser")
     table = soup_uncommented.find("table", {"id": "stats_standard"})
-    print(table)
 
     offensive_position = {'FW','MF'}
     filtered_rows = []
